@@ -1,11 +1,4 @@
-substitutions:
-  _ENV: gs://h-05-450908_cloudbuild/source/.env
-
 steps:
-  # Step 1: Mengambil file .env dari Cloud Storage
-  - name: "gcr.io/cloud-builders/gsutil"
-    args: ["cp", "${_ENV}", "backend/.env"]
-
   # 1. Build Docker image untuk backend
   - name: "gcr.io/cloud-builders/docker"
     args: ["build", "-t", "gcr.io/$PROJECT_ID/notes-notesappbe", "."]
