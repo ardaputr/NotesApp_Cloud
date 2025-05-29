@@ -4,7 +4,7 @@ steps:
     args: ["build", "-t", "gcr.io/$PROJECT_ID/notes-notesappbe", "."]
     dir: "backend"
 
-  # 2. Push ke Container Registry / Artifact Registry
+  # 2. Push ke Container Registry
   - name: "gcr.io/cloud-builders/docker"
     args: ["push", "gcr.io/$PROJECT_ID/notes-notesappbe"]
 
@@ -27,7 +27,5 @@ steps:
         "--allow-unauthenticated",
       ]
 
-# Log hanya akan disimpan di Google Cloud Logging
-# Log tidak akan disimpan di Google Cloud Storage (butuh hak akses).
 options:
   logging: CLOUD_LOGGING_ONLY
