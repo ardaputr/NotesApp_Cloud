@@ -26,14 +26,14 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       await fetch(`${BASE_URL}/auth/logout`, {
         method: "POST",
-        credentials: "include"
+        credentials: "include",
       });
     } catch (err) {
       console.error("Logout request gagal", err);
     }
     localStorage.removeItem("accessToken");
     alert("Logout berhasil");
-    window.location.href = "auth.html"; 
+    window.location.href = "auth.html";
   });
 });
 
@@ -89,7 +89,7 @@ function displayNoteTitles(notes) {
   const notesList = document.getElementById("notes-list");
   notesList.innerHTML = "";
 
-  notes.forEach(note => {
+  notes.forEach((note) => {
     const noteItem = document.createElement("li");
     noteItem.textContent = note.judul;
     noteItem.classList.add("note-item");
@@ -174,11 +174,17 @@ async function updateNote() {
   }
 
   try {
-    const response = await fetchWithRefresh(`${BASE_URL}/notes/${selectedNoteId}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ judul: updatedTitle, deskripsi: updatedContent }),
-    });
+    const response = await fetchWithRefresh(
+      `${BASE_URL}/notes/${selectedNoteId}`,
+      {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          judul: updatedTitle,
+          deskripsi: updatedContent,
+        }),
+      }
+    );
 
     if (response.ok) {
       alert("Note updated!");
@@ -200,9 +206,12 @@ async function deleteNote() {
   if (!confirm("Are you sure you want to delete this note?")) return;
 
   try {
-    const response = await fetchWithRefresh(`${BASE_URL}/notes/${selectedNoteId}`, {
-      method: "DELETE",
-    });
+    const response = await fetchWithRefresh(
+      `${BASE_URL}/notes/${selectedNoteId}`,
+      {
+        method: "DELETE",
+      }
+    );
 
     if (response.ok) {
       alert("Note has been deleted!");

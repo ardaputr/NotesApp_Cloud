@@ -59,28 +59,35 @@ const PORT = process.env.PORT || 5000;
 
 // const allowedOrigins = [
 //   "http://127.0.0.1:5500",
-//   "https://be-525057870643.us-central1.run.app",
-//   "https://be-notesapp-525057870643.us-central1.run.app",
-//   "https://notes-notesappbe-525057870643.us-central1.run.app",
-//   "https://h-05-450908.uc.r.appspot.com", // tambahkan origin frontend mu jika perlu
+//   // "https://be-525057870643.us-central1.run.app",
+//   // "https://be-notesapp-525057870643.us-central1.run.app",
+//   // "https://notes-notesappbe-525057870643.us-central1.run.app",
+//   "https://h-05-450908.uc.r.appspot.com",
 // ];
 
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("CORS policy: Origin not allowed by CORS"));
-      }
-    },
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: function (origin, callback) {
+//       if (!origin) return callback(null, true);
+//       if (allowedOrigins.includes(origin)) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error("CORS policy: Origin not allowed by CORS"));
+//       }
+//     },
+//     credentials: true,
+//   })
+// );
 
-app.options(
-  "*",
+// app.options(
+//   "*",
+//   cors({
+//     origin: "https://h-05-450908.uc.r.appspot.com",
+//     credentials: true,
+//   })
+// );
+
+app.use(
   cors({
     origin: "https://h-05-450908.uc.r.appspot.com",
     credentials: true,
