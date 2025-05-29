@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Login</title>
     <link rel="stylesheet" href="./stylelogin.css" />
+    <style>
+      /* Tambahan style kecil agar pointer cursor muncul di toggle text */
+      #toggle-text span {
+        color: #007bff;
+        cursor: pointer;
+      }
+      .password-toggle-icon {
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
     <div class="auth-container"></div>
@@ -26,7 +36,6 @@
           title="Show/Hide Password"
           >&#128065;</span
         >
-        <!-- &#128065; adalah emoji mata sebagai ikon -->
       </div>
       <button type="submit">Login</button>
     </form>
@@ -49,7 +58,7 @@
           >&#128065;</span
         >
       </div>
-      <button type="submit">Register</button>
+      <button type="submit">Registersss</button>
     </form>
 
     <p id="toggle-text">
@@ -57,45 +66,51 @@
     </p>
 
     <script>
-      // const BASE_URL = "http://localhost:5000/auth";
+      // Base URL API
       const BASE_URL =
         "https://notes-notesappbe-525057870643.us-central1.run.app/auth";
-      // const BASE_URL = "https://notes-notesappbe-525057870643.us-central1.run.app";
-      // const BASE_URL = "https://be-525057870643.us-central1.run.app/auth";
 
+      // Ambil elemen utama
       const loginForm = document.getElementById("loginForm");
       const registerForm = document.getElementById("registerForm");
       const toggleText = document.getElementById("toggle-text");
-      const toggleBtn = document.getElementById("toggle-btn");
       const formTitle = document.getElementById("form-title");
 
+      // Fungsi toggle antara login dan register form
       function toggleForms() {
         if (loginForm.style.display !== "none") {
+          // Tampilkan register, sembunyikan login
           loginForm.style.display = "none";
           registerForm.style.display = "block";
           formTitle.textContent = "Register";
 
+          // Update toggle text dan pasang event listener baru
           toggleText.innerHTML =
-            'Have an account? <span id="toggle-btn" style="color:#007bff; cursor:pointer;">Sign In</span>';
+            'Have an account? <span id="toggle-btn">Sign In</span>';
           document
             .getElementById("toggle-btn")
             .addEventListener("click", toggleForms);
         } else {
+          // Tampilkan login, sembunyikan register
           registerForm.style.display = "none";
           loginForm.style.display = "block";
           formTitle.textContent = "Login";
 
+          // Update toggle text dan pasang event listener baru
           toggleText.innerHTML =
-            'Don\'t have an account? <span id="toggle-btn" style="color:#007bff; cursor:pointer;">Sign Up</span>';
+            'Don\'t have an account? <span id="toggle-btn">Sign Up</span>';
           document
             .getElementById("toggle-btn")
             .addEventListener("click", toggleForms);
         }
       }
 
-      toggleBtn.addEventListener("click", toggleForms);
+      // Pasang event listener awal untuk toggle form
+      document
+        .getElementById("toggle-btn")
+        .addEventListener("click", toggleForms);
 
-      // Fungsi toggle show/hide password pakai icon
+      // Fungsi toggle show/hide password dengan icon
       function setupTogglePassword(iconId, inputId) {
         const icon = document.getElementById(iconId);
         const input = document.getElementById(inputId);
@@ -115,7 +130,7 @@
       setupTogglePassword("toggleLoginPassword", "loginPassword");
       setupTogglePassword("toggleRegPassword", "regPassword");
 
-      // Login submit
+      // Login submit handler
       loginForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const email = document.getElementById("loginEmail").value.trim();
@@ -147,7 +162,7 @@
         }
       });
 
-      // Register submit
+      // Register submit handler
       registerForm.addEventListener("submit", async (e) => {
         e.preventDefault();
         const name = document.getElementById("regName").value.trim();
